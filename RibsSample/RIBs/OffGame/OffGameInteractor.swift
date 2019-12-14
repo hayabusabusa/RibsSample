@@ -10,7 +10,7 @@ import RIBs
 import RxSwift
 
 protocol OffGameRouting: ViewableRouting {
-    // TODO: Declare methods the interactor can invoke to manage sub-tree via the router.
+    func routeToTicTacToe()
 }
 
 protocol OffGamePresentable: Presentable {
@@ -27,8 +27,6 @@ final class OffGameInteractor: PresentableInteractor<OffGamePresentable>, OffGam
     weak var router: OffGameRouting?
     weak var listener: OffGameListener?
 
-    // TODO: Add additional dependencies to constructor. Do not perform any logic
-    // in constructor.
     override init(presenter: OffGamePresentable) {
         super.init(presenter: presenter)
         presenter.listener = self
@@ -36,11 +34,16 @@ final class OffGameInteractor: PresentableInteractor<OffGamePresentable>, OffGam
 
     override func didBecomeActive() {
         super.didBecomeActive()
-        // TODO: Implement business logic here.
     }
 
     override func willResignActive() {
         super.willResignActive()
-        // TODO: Pause any business logic.
+    }
+}
+
+extension OffGameInteractor {
+    
+    func startGame() {
+        router?.routeToTicTacToe()
     }
 }

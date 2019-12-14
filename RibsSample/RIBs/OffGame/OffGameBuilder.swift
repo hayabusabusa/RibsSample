@@ -31,10 +31,15 @@ final class OffGameBuilder: Builder<OffGameDependency>, OffGameBuildable {
     }
 
     func build(withListener listener: OffGameListener) -> OffGameRouting {
-        //let component = OffGameComponent(dependency: dependency)
+        let component = OffGameComponent(dependency: dependency)
         let viewController = OffGameViewController.instantiate()
         let interactor = OffGameInteractor(presenter: viewController)
         interactor.listener = listener
-        return OffGameRouter(interactor: interactor, viewController: viewController)
+        
+        let ticTacToeBuilder = TicTacToeBuilder(dependency: component)
+        
+        return OffGameRouter(interactor: interactor,
+                             viewController: viewController,
+                             ticTacToeBuilder: ticTacToeBuilder)
     }
 }

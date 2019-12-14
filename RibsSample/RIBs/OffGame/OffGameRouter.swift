@@ -8,20 +8,32 @@
 
 import RIBs
 
-protocol OffGameInteractable: Interactable {
+protocol OffGameInteractable: Interactable, TicTacToeListener {
     var router: OffGameRouting? { get set }
     var listener: OffGameListener? { get set }
 }
 
 protocol OffGameViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy.
+    func present(viewControllable: ViewControllable)
 }
 
 final class OffGameRouter: ViewableRouter<OffGameInteractable, OffGameViewControllable>, OffGameRouting {
 
-    // TODO: Constructor inject child builder protocols to allow building children.
-    override init(interactor: OffGameInteractable, viewController: OffGameViewControllable) {
+    private let ticTacToeBuilder: TicTacToeBuildable
+    
+    init(interactor: OffGameInteractable,
+         viewController: OffGameViewControllable,
+         ticTacToeBuilder: TicTacToeBuildable) {
+        self.ticTacToeBuilder = ticTacToeBuilder
         super.init(interactor: interactor, viewController: viewController)
         interactor.router = self
+    }
+}
+
+extension OffGameRouter {
+    
+    func routeToTicTacToe() {
+        let ticTacToe = ticTacToeBuilder.build(withListener: interactor)
+        viewController.present(viewControllable: ticTacToe.viewControllable)
     }
 }
