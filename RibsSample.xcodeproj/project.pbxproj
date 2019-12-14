@@ -125,6 +125,17 @@
 			path = OffGame;
 			sourceTree = "<group>";
 		};
+		7156F1C123A528A8007DA980 /* RIBs */ = {
+			isa = PBXGroup;
+			children = (
+				A4E836E723A330F200558B92 /* Root */,
+				A46C57A623A37C3A00E1714E /* LoggedOut */,
+				7156F1A723A4A062007DA980 /* LoggedIn */,
+				7156F1B223A4C571007DA980 /* OffGame */,
+			);
+			path = RIBs;
+			sourceTree = "<group>";
+		};
 		A46C57A123A37B5E00E1714E /* Skin */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,12 +177,9 @@
 		A4E836B623A319ED00558B92 /* RibsSample */ = {
 			isa = PBXGroup;
 			children = (
+				7156F1C123A528A8007DA980 /* RIBs */,
 				A4E836B723A319ED00558B92 /* AppDelegate.swift */,
 				A4E836B923A319ED00558B92 /* SceneDelegate.swift */,
-				A4E836E723A330F200558B92 /* Root */,
-				A46C57A623A37C3A00E1714E /* LoggedOut */,
-				7156F1A723A4A062007DA980 /* LoggedIn */,
-				7156F1B223A4C571007DA980 /* OffGame */,
 				A4E836E623A330E400558B92 /* Environment */,
 				A4E836C023A319F100558B92 /* Assets.xcassets */,
 				A4E836C223A319F100558B92 /* LaunchScreen.storyboard */,
