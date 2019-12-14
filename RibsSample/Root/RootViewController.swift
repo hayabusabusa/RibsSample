@@ -39,4 +39,9 @@ extension RootViewController {
             dismiss(animated: true, completion: nil)
         }
     }
+    
+    func replaceRoot(viewControllable: ViewControllable) {
+        let vc = viewControllable.uiviewController
+        replaceRoot(to: vc)
+    }
 }

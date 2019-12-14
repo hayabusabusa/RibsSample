@@ -8,35 +8,58 @@
 
 import RIBs
 
-protocol LoggedInInteractable: Interactable {
+protocol LoggedInInteractable: Interactable, OffGameListener {
     var router: LoggedInRouting? { get set }
     var listener: LoggedInListener? { get set }
 }
 
+// LoggedInのRIBはViewを持たないので親のRootのViewをもつ
 protocol LoggedInViewControllable: ViewControllable {
-    // TODO: Declare methods the router invokes to manipulate the view hierarchy. Since
-    // this RIB does not own its own view, this protocol is conformed to by one of this
-    // RIB's ancestor RIBs' view.
+    func present(viewControllable: ViewControllable)
+    func dismiss(viewControllable: ViewControllable)
+    func replaceRoot(viewControllable: ViewControllable)
 }
 
 //  Viewを持たないので、親のViewを持つ
 extension RootViewController: LoggedInViewControllable {}
 
 final class LoggedInRouter: Router<LoggedInInteractable>, LoggedInRouting {
+    
+    // MARK: Private
+
+    private let viewController: LoggedInViewControllable
+    
+    private let offGameBuilder: OffGameBuildable
 
     // TODO: Constructor inject child builder protocols to allow building children.
-    init(interactor: LoggedInInteractable, viewController: LoggedInViewControllable) {
+    init(interactor: LoggedInInteractable,
+         viewController: LoggedInViewControllable,
+         offGameBuilder: OffGameBuildable) {
         self.viewController = viewController
+        
+        // 子となるRIB
+        self.offGameBuilder = offGameBuilder
         super.init(interactor: interactor)
         interactor.router = self
     }
 
-    func cleanupViews() {
-        // TODO: Since this router does not own its view, it needs to cleanup the views
-        // it may have added to the view hierarchy, when its interactor is deactivated.
+    override func didLoad() {
+        super.didLoad()
+        attachOffGame()
     }
+    
+    func cleanupViews() {
+//        if let currentChild = currentChild {
+//            viewController.dismiss(viewController: currentChild.viewControllable)
+//        }
+    }
+}
 
-    // MARK: - Private
-
-    private let viewController: LoggedInViewControllable
+extension LoggedInRouter {
+    
+    private func attachOffGame() {
+        let offGame = offGameBuilder.build(withListener: interactor)
+        attachChild(offGame)
+        viewController.replaceRoot(viewControllable: offGame.viewControllable)
+    }
 }

@@ -19,6 +19,7 @@ protocol RootViewControllable: ViewControllable {
     // VCにして欲しいこと
     func present(viewControllable: ViewControllable)
     func dismiss(viewControllable: ViewControllable)
+    func replaceRoot(viewControllable: ViewControllable)
 }
 
 /// アプリのRootとなるRouter

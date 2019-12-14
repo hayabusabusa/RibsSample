@@ -63,23 +63,38 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lf5-H5-LR7">
-                                <rect key="frame" x="32" y="68" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="NDk-Bf-ImD"/>
-                                    <constraint firstAttribute="width" constant="24" id="rjv-xW-R14"/>
-                                </constraints>
-                                <state key="normal" image="xmark" catalog="system"/>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="aaS-8l-KtR">
+                                <rect key="frame" x="32" y="68" width="350" height="84"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logged Off RIB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="362-SI-fcq">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="akE-G1-Ur4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="26"/>
+                                        <color key="textColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h1W-vi-IGX">
+                                        <rect key="frame" x="0.0" y="36" width="350" height="48"/>
+                                        <string key="text">Viewを持つRIBです。
+親のRIBはRootでフォーム入力後、ボタンタップでLoggedInのRIBに切り替えられます。</string>
+                                        <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="16"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="M0u-us-opB" firstAttribute="leading" secondItem="HgA-Aw-ocO" secondAttribute="leading" constant="32" id="9mL-dG-kmu"/>
+                            <constraint firstItem="aaS-8l-KtR" firstAttribute="top" secondItem="HgA-Aw-ocO" secondAttribute="top" constant="24" id="9s4-ou-AuU"/>
+                            <constraint firstItem="aaS-8l-KtR" firstAttribute="leading" secondItem="HgA-Aw-ocO" secondAttribute="leading" constant="32" id="DmB-zd-05B"/>
                             <constraint firstItem="f63-xK-gLZ" firstAttribute="top" secondItem="M0u-us-opB" secondAttribute="bottom" constant="24" id="HWL-7F-Puh"/>
                             <constraint firstItem="M0u-us-opB" firstAttribute="centerY" secondItem="BNZ-bO-rhc" secondAttribute="centerY" constant="-40" id="U1r-Lm-rSY"/>
-                            <constraint firstItem="Lf5-H5-LR7" firstAttribute="leading" secondItem="HgA-Aw-ocO" secondAttribute="leading" constant="32" id="X3T-IP-1IK"/>
-                            <constraint firstItem="Lf5-H5-LR7" firstAttribute="top" secondItem="HgA-Aw-ocO" secondAttribute="top" constant="24" id="e0m-yD-11r"/>
                             <constraint firstItem="f63-xK-gLZ" firstAttribute="leading" secondItem="HgA-Aw-ocO" secondAttribute="leading" constant="32" id="h9K-hg-8bE"/>
+                            <constraint firstItem="HgA-Aw-ocO" firstAttribute="trailing" secondItem="aaS-8l-KtR" secondAttribute="trailing" constant="32" id="j4m-XI-Dm9"/>
                             <constraint firstItem="HgA-Aw-ocO" firstAttribute="trailing" secondItem="M0u-us-opB" secondAttribute="trailing" constant="32" id="lRR-Ao-wBq"/>
                             <constraint firstItem="HgA-Aw-ocO" firstAttribute="trailing" secondItem="f63-xK-gLZ" secondAttribute="trailing" constant="32" id="z15-ai-tKI"/>
                         </constraints>
@@ -93,10 +108,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k0X-am-vwV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="244" y="205"/>
+            <point key="canvasLocation" x="243.47826086956525" y="204.91071428571428"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="xmark" catalog="system" width="64" height="56"/>
-    </resources>
 </document>

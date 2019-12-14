@@ -15,14 +15,12 @@ protocol LoggedInDependency: Dependency {
     // created by this RIB.
 }
 
-final class LoggedInComponent: Component<LoggedInDependency> {
-
-    // TODO: Make sure to convert the variable into lower-camelcase.
+// 子のRIBとの依存関係を追加する
+final class LoggedInComponent: Component<LoggedInDependency>, OffGameDependency {
+    
     fileprivate var LoggedInViewController: LoggedInViewControllable {
         return dependency.LoggedInViewController
     }
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
 // MARK: - Builder
@@ -41,6 +39,12 @@ final class LoggedInBuilder: Builder<LoggedInDependency>, LoggedInBuildable {
         let component = LoggedInComponent(dependency: dependency)
         let interactor = LoggedInInteractor()
         interactor.listener = listener
-        return LoggedInRouter(interactor: interactor, viewController: component.LoggedInViewController)
+        
+        // 子のRIBのBuilderを生成
+        let offGameBuilder = OffGameBuilder(dependency: component)
+        
+        return LoggedInRouter(interactor: interactor,
+                              viewController: component.LoggedInViewController,
+                              offGameBuilder: offGameBuilder)
     }
 }
