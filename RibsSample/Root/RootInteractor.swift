@@ -11,6 +11,7 @@ import RxSwift
 
 protocol RootRouting: ViewableRouting {
     // Routing to some VC
+    func routeToLoggedIn(name: String, password: String)
 }
 
 protocol RootPresentable: Presentable {
@@ -39,5 +40,15 @@ final class RootInteractor: PresentableInteractor<RootPresentable>, RootInteract
 
     override func willResignActive() {
         super.willResignActive()
+    }
+}
+
+// MARK: - LoggedOutListener
+
+extension RootInteractor {
+    
+    // 子のRIBのLoggedOutから受け取った処理
+    func didLogin(name: String, password: String) {
+        router?.routeToLoggedIn(name: name, password: password)
     }
 }

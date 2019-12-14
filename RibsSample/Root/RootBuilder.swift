@@ -17,15 +17,6 @@ final class RootComponent: Component<RootDependency> {
     // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
 }
 
-// LoggedOutBuilderを作成するために必要な親から子への依存関係
-protocol RootDependencyLoggedOut: Dependency {
-    
-}
-
-extension RootComponent: LoggedOutDependency {
-    
-}
-
 // MARK: - Builder
 
 protocol RootBuildable: Buildable {
@@ -45,9 +36,11 @@ final class RootBuilder: Builder<RootDependency>, RootBuildable {
         
         // 子のRIBのBuilderを作成
         let loggedOutBuilder = LoggedOutBuilder(dependency: component)
+        let loggedInBuilder = LoggedInBuilder(dependency: component)
 
         return RootRouter(interactor: interactor,
                           viewController: viewController,
-                          loggedOutBuilder: loggedOutBuilder)
+                          loggedOutBuilder: loggedOutBuilder,
+                          loggedInBuilder: loggedInBuilder)
     }
 }

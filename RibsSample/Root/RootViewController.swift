@@ -33,4 +33,10 @@ extension RootViewController {
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true, completion: nil)
     }
+    
+    func dismiss(viewControllable: ViewControllable) {
+        if presentedViewController === viewControllable.uiviewController {
+            dismiss(animated: true, completion: nil)
+        }
+    }
 }

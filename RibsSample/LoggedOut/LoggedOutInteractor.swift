@@ -23,7 +23,8 @@ protocol LoggedOutPresentable: Presentable {
 
 // 他のRIBとやり取りするためのProtocol
 protocol LoggedOutListener: class {
-    // TODO: Declare methods the interactor can invoke to communicate with other RIBs.
+    // 親RIB(Root)に伝える処理
+    func didLogin(name: String, password: String)
 }
 
 final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>, LoggedOutInteractable, LoggedOutPresentableListener {
@@ -52,15 +53,14 @@ final class LoggedOutInteractor: PresentableInteractor<LoggedOutPresentable>, Lo
 extension LoggedOutInteractor {
     
     func login(name: String?, password: String?) {
-        let message: String
         if let name = name,
             let password = password,
             !name.isEmpty && !password.isEmpty {
-            message = "UserName: \(name)\nPassword: \(password)"
+            // Listener経由で親RIBにアクセス
+            listener?.didLogin(name: name, password: password)
         } else {
-            message = "未入力の項目があります"
+            // presentable経由でVCにアクセス
+            presenter.presentAlert(message: "未入力の項目があります。")
         }
-        
-        presenter.presentAlert(message: message)
     }
 }
